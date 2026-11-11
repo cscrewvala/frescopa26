@@ -353,6 +353,10 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  // the homepage floats a transparent header over its hero (see header.css);
+  // flag it before first paint so the header space is never reserved there
+  const pagePath = window.location.pathname.replace(/^\/content(?=\/)/, '');
+  if (['/', '/index'].includes(pagePath)) document.body.classList.add('home');
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

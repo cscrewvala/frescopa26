@@ -113,10 +113,12 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
+  // load nav as fragment (workspace previews serve pages under /content/)
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/fragments/nav';
-  const fragment = await loadFragment(navPath);
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  const contentRoot = window.location.pathname.startsWith('/content/')
+    && !navPath.startsWith('/content/') ? '/content' : '';
+  const fragment = await loadFragment(`${contentRoot}${navPath}`);
 
   // decorate nav DOM
   block.textContent = '';
@@ -142,7 +144,7 @@ export default async function decorate(block) {
     // mark the nav link for the current site section. Choose the link whose
     // path is the longest match for the current page so a deep page like
     // /machines/atelier highlights "The Atelier" rather than "Machines".
-    const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+    const currentPath = window.location.pathname.replace(contentRoot, '').replace(/\/+$/, '') || '/';
     let currentLink = null;
     let currentLen = -1;
     navSections.querySelectorAll('a[href]').forEach((link) => {

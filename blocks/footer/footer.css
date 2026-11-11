@@ -43,7 +43,7 @@ footer .footer .footer-brand p {
 
 /* newsletter signup */
 footer .footer .footer-signup {
-  margin-top: var(--space-lg);
+  margin: var(--space-lg) 0 0;
 }
 
 footer .footer .footer-signup label {
