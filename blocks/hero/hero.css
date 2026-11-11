@@ -31,6 +31,12 @@
   background-color: var(--charcoal);
 }
 
+/* The nav-height offset only clears the homepage's floating header; elsewhere
+   the solid header sits above the hero, so drop it. */
+body:not(.home) .hero.block:not(.short, .no-image) {
+  padding-top: 2.5rem;
+}
+
 .hero.block.short {
   min-height: 0;
   height: auto;
@@ -245,6 +251,10 @@
   .hero.block {
     min-height: 828px;
     padding: calc(var(--nav-height) + 6rem) 0 3.4rem;
+  }
+
+  body:not(.home) .hero.block:not(.short, .no-image) {
+    padding-top: 6rem;
   }
 
   .hero.block > div:last-child {

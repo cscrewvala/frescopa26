@@ -13,3 +13,5 @@ helix-importer-ui
 !AGENTS.md
 .hlx/
 .of1/
+migration-work/navigation-validation/
+migration-work/footer-validation/
